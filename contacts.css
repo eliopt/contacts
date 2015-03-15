@@ -1,0 +1,238 @@
+/* CSS declarations go here */
+* {
+	box-sizing:border-box;
+	font-family: "helvetica neue";
+	outline: none;
+}
+name, firstName, li span {
+	text-transform: capitalize;
+}
+[contentEditable=true] {
+	cursor: text;
+	position: relative;
+	color: #000;
+	font-weight: 300;
+	text-transform: capitalize;
+}
+[contentEditable=true]:empty:before{
+    content:attr(data-ph);
+    color: #888;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+dropdown {
+	display: none;
+	background: #fff !important;
+	border:1px solid #ddd;
+	z-index: 100;
+	margin-top: 10px;
+	border-radius: 3px;
+	min-width: 200px;
+	max-height: 200px;
+	overflow: hidden;
+	overflow-y:scroll;
+}
+dropdown li {
+	list-style: none;
+	text-transform: capitalize;
+	padding: 7px;
+	border-bottom: 1px solid #ddd;
+	font-size: 12px;
+	cursor: pointer;
+	font-weight: 200;
+}
+dropdown li:last-child {
+	border-bottom: none;
+}
+html, body {
+	position: fixed;
+	width: 100%;
+	overflow: hidden;
+	font-weight: 100;
+	margin: 0;
+	height: 100%;
+	color:rgb(51, 51, 51);
+}
+button {
+	color:rgb(0, 122, 255);
+	font-weight: 100;
+	font-size: 25px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+button:hover {
+	color:rgb(0, 99, 204);
+}
+sidebar.left {
+	width: 300px;
+	height: 100%;
+	display: block;
+	position: fixed;
+	border-right: 1px solid #c2c4c5;
+}
+content {
+	display: block;
+	position: fixed;
+	left: 300px;
+	width: calc(100% - 300px);
+	height: 100%;
+	padding: 3em;
+}
+search {
+	height: 44px;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	top:0px;
+	background: #fff;
+	border-bottom: 1px solid #a3c3db;
+}
+search::before {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 12px;
+	left: 15px;
+	background: url('https://www.icloud.com/applications/contacts/15B.9bb3ce9/fr-fr/packed-2.png');
+	background-position: -558px 0px;
+	background-repeat:no-repeat;
+}
+search input {
+	background: transparent;
+	border:none;
+	position: absolute;
+	height: 44px;
+	top:0px;
+	width: 100%;
+	padding-left: 45px;
+	left: 0px;
+	outline:none;
+	letter-spacing: 1px;
+	font-weight: 100 !important;
+	font-size: 19px;
+}
+toolbar.add {
+	height: 44px;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	bottom:0px;
+	background: #fff;
+	border-top: 1px solid #c2c4c5;
+}
+toolbar.add button {
+	float: right;
+	font-size: 30px;
+}
+contacts {
+	display: block;
+	height: calc(100% - 88px);
+	margin-top: 44px;
+	overflow:hidden;
+	overflow-y:scroll;
+	background: rgb(249, 249, 249);
+}
+contacts li {
+	list-style: none;
+	height: 51px;
+	margin-top: -1px;
+	position: relative;
+}
+contacts li:focus, contacts li.active {
+	height: 51px;
+	background: rgb(216, 238, 250);
+	border-bottom: 1px solid rgb(182, 222, 245);
+	border-top:1px solid rgb(182, 222, 245);
+	outline:0;
+}
+contacts li span {
+	display: block;
+	margin-left: 15px;
+	border-top:1px solid transparent;
+	border-bottom:1px solid rgb(231, 231, 231);
+	font-size: 17px;
+	font-weight: 300;
+	overflow: hidden;
+	height: 51px;
+	line-height: 48px;
+}
+contacts li:last-child span {
+	border-color: transparent !important;
+}
+contacts li:focus span, contacts li.active span {
+	line-height: 46px;
+	border-color: transparent !important;
+}
+contacts li span strong {
+	font-weight: 500;
+}
+contacts li i {
+	display: block;
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	margin-top: 23px;
+}
+contacts .contactCreate input {
+	background: transparent;
+	border:none;
+	outline:none;
+	font-size: 17px;
+	height: 51px;
+	font-weight: 200;
+}
+name {
+	font-weight: 500 !important;
+	font-size: 40px;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	cursor: text;
+}
+firstName {
+	cursor: text;
+	font-weight: 200;
+	font-size: 40px;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	margin-right: 10px;
+}
+groupe {
+	display: inline-block;
+	margin-left: 10px;
+}
+br {
+	display: block;
+}
+[contentEditable=true]:after{
+	display: inline-block;
+    content:attr(data-label);
+	white-space: nowrap;
+    position: absolute;
+    left: 0px;
+    top:-17px;
+    color: #aaa;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 9px;
+}
+adress, cp, city, country, telPersonnal, telOffice, telHome, emailPersonnal, emailOffice, site, university, disciplineUniversity, ecole, disciplineEcole {
+	margin-top: 40px;
+	display: inline-block;
+	margin-right: 5px;
+}
+emailPersonnal, emailOffice, site {
+	text-transform: lowercase !important;
+}
+birthDay, birthMonth, birthYear {
+	margin-top: 40px;
+	display: inline-block;
+}

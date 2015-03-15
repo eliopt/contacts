@@ -1,0 +1,92 @@
+<head>
+    <title>Contacts</title>
+</head>
+
+<body>
+    <sidebar class="left">
+        <search>
+            <input type="text" class="search" placeholder="Rechercher un contact">
+        </search>
+        <contacts>
+            {{#each contacts}}
+            <li data-id="{{_id}}" data-age="{{age birth}}" data-pays="{{data adress.country}}" data-university="{{data etudes.ecole.name}}" data-ecole="{{data etudes.university.name}}" data-ville="{{data adress.city}}" data-groupe="{{data groupe}}" data-telHome="{{data tel.home}}" data-telOffice="{{data tel.office}}" data-telPersonnal="{{data tel.personnal}}" data-nom="{{data name.name}}" data-emailOffice="{{data email.office}}" data-emailPersonnal="{{data email.personnal}}" data-prenom="{{data name.first}}"><span>{{name.first}} <strong>{{name.name}}</strong></span>
+                <i style="background:{{color groupe}}"></i>
+            </li>
+            {{/each}}
+        </contacts>
+        <toolbar class="add">
+            <button>+</button>
+        </toolbar>
+    </sidebar>
+    <content>
+        {{#if idContact}} {{> contact}} {{/if}}
+    </content>
+    <script type="text/javascript">
+    $(document).keydown(function(event) {
+        if (event.keyCode == 40) {
+            event.preventDefault();
+            $('contacts li.active').next().click();
+        } else if (event.keyCode == 38) {
+            $('contacts li.active').prev().click();
+            event.preventDefault();
+        } else if (event.keyCode == 8) {
+            var d = event.srcElement || event.target;
+            if ((d.tagName.toUpperCase() === 'INPUT' &&
+                    (
+                        d.type.toUpperCase() === 'TEXT' ||
+                        d.type.toUpperCase() === 'PASSWORD' ||
+                        d.type.toUpperCase() === 'FILE' ||
+                        d.type.toUpperCase() === 'EMAIL' ||
+                        d.type.toUpperCase() === 'SEARCH' ||
+                        d.type.toUpperCase() === 'DATE')
+                ) ||
+                d.tagName.toUpperCase() === 'TEXTAREA' ||
+                typeof $(d).attr('contenteditable') !== 'undefined') {
+                doPrevent = d.readOnly || d.disabled;
+            } else {
+                doPrevent = true;
+            }
+            if (doPrevent) {
+                event.preventDefault();
+                DbContacts.remove($('contacts li.active').attr('data-id'));
+                $('contacts li.active').next().click();
+            }
+        }
+    });
+    </script>
+</body>
+
+<template name="contact">
+    <firstName tabindex="1" contenteditable="true" data-field="name.first" data-ph="Prénom"></firstName>
+    <name contenteditable="true" data-field="name.name" data-ph="Nom"></name>
+    <groupe contenteditable="true" data-field="groupe" data-ph="Groupe" data-dropdown="true"></groupe>
+    <dropdown data-target="groupe">
+        {{#each groupes}}
+        <li>{{name}}</li>
+        {{/each}}
+    </dropdown>
+    <br/>
+    <adress contenteditable="true" data-field="adress.adress" data-label="Adresse" data-ph="Adresse"></adress>
+    <cp contenteditable="true" data-field="adress.cp" data-label="CP" data-ph="Code Postal"></cp>
+    <city contenteditable="true" data-field="adress.city" data-label="Ville" data-ph="Ville"></city>
+    <country contenteditable="true" data-field="adress.country" data-label="Pays" data-ph="Pays"></country>
+    <br/>
+    <birthDay contenteditable="true" data-field="birth.day" data-label="Date de naissance" data-ph="01"></birthDay> /
+    <birthMonth contenteditable="true" data-field="birth.month" data-ph="01"></birthMonth> /
+    <birthYear contenteditable="true" data-field="birth.year" data-ph="1966"></birthYear>
+    <br/>
+    <telPersonnal contenteditable="true" data-field="tel.personnal" data-label="Téléphone portable" data-ph="Téléphone portable"></telPersonnal>
+    <telHome contenteditable="true" data-field="tel.home" data-label="Téléphone maison" data-ph="Téléphone maison"></telHome>
+    <telOffice contenteditable="true" data-field="tel.office" data-label="Téléphone bureau" data-ph="Téléphone bureau"></telOffice>
+    <br/>
+    <emailPersonnal contenteditable="true" data-field="email.personnal" data-label="Email personnel" data-ph="Email personnel"></emailPersonnal>
+    <emailOffice contenteditable="true" data-field="email.office" data-label="Email bureau" data-ph="Email bureau"></emailOffice>
+    <br/>
+    <site contenteditable="true" data-field="site.url" data-label="Site web" data-ph="http://"></site>
+    <br/>
+    <ecole contenteditable="true" data-field="etudes.ecole.name" data-label="Ecole" data-ph="Ecole"></ecole>
+    <disciplineEcole contenteditable="true" data-field="etudes.ecole.discipline" data-label="Discipline" data-ph="Violon"></disciplineEcole>
+    <br/>
+    <university contenteditable="true" data-field="etudes.university.name" data-label="Université" data-ph="CNSMDP"></university>
+    <disciplineUniversity contenteditable="true" data-field="etudes.university.discipline" data-label="Discipline" data-ph="Violon"></disciplineUniversity>
+</template>
